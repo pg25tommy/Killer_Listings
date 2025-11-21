@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { HistoryBadge, IncidentCard } from "@/components/ui";
 import { HISTORY_SCORE_LABELS } from "@/lib/constants";
+import { HistoryScore } from "@/types";
 
 interface PropertyPageProps {
   params: Promise<{ id: string }>;
