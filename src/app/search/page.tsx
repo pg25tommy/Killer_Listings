@@ -55,7 +55,7 @@ async function SearchResults({ query, city }: { query?: string; city?: string })
           id={property.id}
           address={property.address}
           city={property.city}
-          historyScore={property.historyScore}
+          historyScore={property.historyScore as import("@/types").HistoryScore}
           listingPrice={property.listingPrice}
           incidentCount={property._count.incidents}
         />
