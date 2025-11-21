@@ -47,9 +47,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             )}
           </div>
           <div className="flex flex-col items-start gap-2 md:items-end">
-            <HistoryBadge score={property.historyScore} size="lg" />
+            <HistoryBadge score={property.historyScore as HistoryScore} size="lg" />
             <p className="text-sm text-muted max-w-xs md:text-right">
-              {HISTORY_SCORE_LABELS[property.historyScore]}
+              {HISTORY_SCORE_LABELS[property.historyScore as HistoryScore]}
             </p>
           </div>
         </div>
