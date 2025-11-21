@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Noir theme - dark by default */
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --surface: #1a1a2e;
+  --surface-light: #252540;
+  --accent-crimson: #8b0000;
+  --accent-crimson-light: #b22222;
+  --status-clean: #22c55e;
+  --status-possible: #eab308;
+  --status-confirmed: #dc2626;
+  --muted: #6b7280;
+  --border: #374151;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-accent: var(--accent-crimson);
+  --color-accent-light: var(--accent-crimson-light);
+  --color-clean: var(--status-clean);
+  --color-possible: var(--status-possible);
+  --color-confirmed: var(--status-confirmed);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Custom scrollbar for noir theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }

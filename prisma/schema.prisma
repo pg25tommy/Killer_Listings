@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Property {
+  id           String   @id @default(cuid())
+  address      String
+  city         String
+  province     String   @default("BC")
+  postalCode   String?
+  latitude     Float
+  longitude    Float
+  listingPrice Int?
+  status       String?
+  historyScore String   @default("CLEAN") // CLEAN, POSSIBLE, CONFIRMED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  incidents Incident[]
+  favorites Favorite[]
+}
+
+model Incident {
+  id         String   @id @default(cuid())
+  propertyId String?
+  latitude   Float
+  longitude  Float
+  type       String
+  date       DateTime
+  summary    String
+  sourceUrl  String?
+  severity   Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  property Property? @relation(fields: [propertyId], references: [id])
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  favorites Favorite[]
+}
+
+model Favorite {
+  id         String   @id @default(cuid())
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, propertyId])
+}
